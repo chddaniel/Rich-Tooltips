@@ -8,7 +8,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         clean: true, // Cleans the dist folder before each build
     },
-    mode: 'development', // 'development' for live reload and debugging, 'production' for builds
+    mode: 'production', // 'development' for live reload and debugging, 'production' for builds
     devServer: {
         static: path.resolve(__dirname, 'src'),
         port: 3000,

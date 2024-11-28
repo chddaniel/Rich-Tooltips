@@ -70,8 +70,9 @@ function createToolTip(button) {
 
     // Function to load the media
     function loadMedia() {
-        if (mediaElement && mediaElement.getAttribute('data-src')) {
-            mediaElement.src = mediaElement.getAttribute('data-src'); // Load media
+        // Only set the media source if it has not been loaded yet
+        if (mediaElement && mediaElement.getAttribute('data-src') && !mediaElement.src) {
+            mediaElement.src = mediaElement.getAttribute('data-src'); 
         }
     }
 

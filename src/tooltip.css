@@ -21,6 +21,9 @@
   z-index:9999;
   user-select:none;
   pointer-events:none;
+  box-shadow: 0 5px 5px rgb(86 86 86 / 10%), 0 10px 20px rgb(110 110 110 / 5%);
+
+
 }
 .rich-tooltip__content.show {
   opacity: 1; 

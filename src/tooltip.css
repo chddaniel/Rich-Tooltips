@@ -1,0 +1,82 @@
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+.rich-tooltip__content {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+  width: max-content;
+  height: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #222;
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 90%;
+  z-index:9999;
+  user-select:none;
+  pointer-events:none;
+}
+.rich-tooltip__content.show {
+  opacity: 1; 
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+
+[data-tooltip][data-video] .rich-tooltip__content-wrapper,
+[data-tooltip][data-image] .rich-tooltip__content-wrapper{
+  width: 500px;
+  height: auto;
+}
+
+.rich-tooltip__content-wrapper img,
+.rich-tooltip__content-wrapper video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display:none;
+}
+
+.rich-tooltip__text-content:has(+ *) {
+  margin-bottom: 8px;
+  display:block;
+  text-align:left;
+}
+
+
+
+
+/* Loading animation */
+.rich-tooltip__placeholder{
+  position: relative;
+  height: 250px;
+  width: 400px;
+  background-color: rgb(25, 25, 25);
+  overflow: hidden;
+  border-radius: 8px;
+}
+.rich-tooltip__placeholder::after{
+  content:'';
+  position: absolute;
+  left: -45%;
+  height: 100%;
+  width: 45%;
+  background-image: linear-gradient(to left, rgba(48, 48, 48, 0.05), rgba(29, 29, 29, 0.3), rgba(37, 37, 37, 0.6), rgba(29, 29, 29, 0.3), rgba(48, 48, 48, 0.05));
+  animation: loading 1s infinite;
+  z-index: 1;
+}
+
+@keyframes loading {
+  0%{
+    left: -45%;
+  }
+  100%{
+    left: 100%;
+  }
+}

@@ -13,8 +13,6 @@
   top: 0;
   left: 0;
   background: #222;
-  color: white;
-  font-weight: 400;
   padding: 8px;
   border-radius: 16px;
   font-size: 1rem;
@@ -48,6 +46,12 @@
   margin-bottom: 8px;
   display: block;
   text-align: left;
+}
+
+.rich-tooltip__text-content{
+  color: white;
+  font-weight: 400;
+  padding: 8px;
 }
 
 /* Loading animation */

@@ -7,8 +7,7 @@ import { offset, flip, shift } from '@floating-ui/dom';
 function isMobile() {
     return window.innerWidth <= 991;
 }
-
-(() => {
+document.addEventListener('DOMContentLoaded', (evt) => {
     if (isMobile()) return;
     // Function to initialize tooltip for each button
     function createToolTip(button) {
@@ -125,7 +124,10 @@ function isMobile() {
     // Initialize all tooltips
     document.querySelectorAll('[data-tooltip]').forEach(createToolTip);
 
-})();
 
 
+
+
+
+})
 

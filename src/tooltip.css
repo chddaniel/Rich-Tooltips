@@ -54,7 +54,7 @@
 .rich-tooltip__placeholder {
   position: relative;
   height: 250px;
-  width: 400px;
+  width: 500px;
   background-color: rgb(25, 25, 25);
   overflow: hidden;
   border-radius: 8px;

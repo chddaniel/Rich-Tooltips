@@ -10,12 +10,16 @@ function isInsideLink(element) {
 document.addEventListener('DOMContentLoaded', (evt) => {
     // Function to initialize tooltip for each button
     function createToolTip(button) {
-        console.log('Creating tooltip');
-        if (!isInsideLink(button) && window.innerWidth < 992) return;
+        // Only create the tooltip if:
+        if (window.innerWidth >= 992 || !isInsideLink(button)) {
+            // Proceed to create tooltip
+        } else {
+            return; // Don't apply the tooltip if it's inside an <a> tag on mobile
+        }
         // Create the tooltip
         const tooltip = document.createElement('div');
-        tooltip.setAttribute('role','tooltip');
-        tooltip.setAttribute('aria-hidden','true');
+        tooltip.setAttribute('role', 'tooltip');
+        tooltip.setAttribute('aria-hidden', 'true');
         tooltip.className = 'rich-tooltip__content';
         tooltip.innerHTML = `
             <div class="rich-tooltip__content-wrapper"></div>
@@ -79,7 +83,7 @@ document.addEventListener('DOMContentLoaded', (evt) => {
         // Add the backdrop
         backdrop = document.createElement('span');
         backdrop.className = 'rich-tooltip__backdrop';
-        tooltip.appendChild(backdrop); 
+        tooltip.appendChild(backdrop);
 
         // Function to load the media
         function loadMedia() {
@@ -107,7 +111,7 @@ document.addEventListener('DOMContentLoaded', (evt) => {
                         position: 'absolute', // Relative to the button
                     });
                 });
-            } 
+            }
         }
 
         // Show and hide the tooltip

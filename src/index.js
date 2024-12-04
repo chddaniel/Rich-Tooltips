@@ -3,29 +3,36 @@ import { computePosition, autoUpdate } from '@floating-ui/dom';
 import { offset, flip, shift } from '@floating-ui/dom';
 
 
-// Function to check if the device is mobile
-function isMobile() {
-    return window.innerWidth <= 991;
+function isInsideLink(element) {
+    return element.closest('a') !== null;
 }
+
 document.addEventListener('DOMContentLoaded', (evt) => {
-    if (isMobile()) return;
+    console.log('DOMContentLoaded');
     // Function to initialize tooltip for each button
     function createToolTip(button) {
+        console.log('Creating tooltip');
+        if (isInsideLink(button)) return;
+        // Create the tooltip
         const tooltip = document.createElement('div');
+        tooltip.setAttribute('role','tooltip');
+        tooltip.setAttribute('aria-hidden','true');
         tooltip.className = 'rich-tooltip__content';
         tooltip.innerHTML = `
             <div class="rich-tooltip__content-wrapper"></div>
         `;
 
         const contentWrapper = tooltip.querySelector('.rich-tooltip__content-wrapper');
+
+        // Append to the button
         button.appendChild(tooltip);
 
-        // Extract data attributes (all optional)
+        // Extract data attributes
         const imageSrc = button.dataset.image; // Image source URL
         const videoSrc = button.dataset.video; // Video source URL
         const textContent = button.dataset.text; // Optional text content
 
-        let mediaElement, placeholder, textElement;
+        let mediaElement, placeholder, textElement, backdrop;
 
         // Add text content if `data-text` is provided
         if (textContent) {
@@ -70,6 +77,11 @@ document.addEventListener('DOMContentLoaded', (evt) => {
             if (mediaElement) contentWrapper.appendChild(mediaElement); // Media element after placeholder
         }
 
+        // Add the backdrop
+        backdrop = document.createElement('span');
+        backdrop.className = 'rich-tooltip__backdrop';
+        tooltip.appendChild(backdrop); 
+
         // Function to load the media
         function loadMedia() {
             // Only set the media source if it has not been loaded yet
@@ -80,24 +92,37 @@ document.addEventListener('DOMContentLoaded', (evt) => {
 
         // Function to update the tooltip position
         function update() {
-            computePosition(button, tooltip, {
-                placement: 'top', // Default placement
-                middleware: [
-                    offset(6),
-                    flip(),
-                    shift({ padding: 5 }),
-                ],
-            }).then(({ x, y }) => {
-                Object.assign(tooltip.style, {
-                    left: `${x}px`,
-                    top: `${y}px`,
+            if (window.innerWidth > 768) {
+                // Use computePosition only on desktop
+                computePosition(button, tooltip, {
+                    placement: 'top',
+                    middleware: [
+                        offset(6),
+                        flip(),
+                        shift({ padding: 5 }),
+                    ],
+                }).then(({ x, y }) => {
+                    Object.assign(tooltip.style, {
+                        left: `${x}px`,
+                        top: `${y}px`,
+                        position: 'absolute', // Relative to the button
+                    });
                 });
-            });
+            } else {
+                // For mobile, align the tooltip manually
+                // Object.assign(tooltip.style, {
+                //     position: 'fixed', // Relative to the viewport
+                //     left: '0',
+                //     bottom: '0',
+                //     width: '100vw',
+                // });
+            }
         }
 
         // Show and hide the tooltip
         function showTooltip() {
             tooltip.classList.add('show'); // Add fade-in class
+            tooltip.setAttribute('aria-hidden', 'false');
             loadMedia(); // Load media or display text when the tooltip is shown
             update();
         }
@@ -125,9 +150,5 @@ document.addEventListener('DOMContentLoaded', (evt) => {
     document.querySelectorAll('[data-tooltip]').forEach(createToolTip);
 
 
-
-
-
-
-})
+}, { once: true })
 

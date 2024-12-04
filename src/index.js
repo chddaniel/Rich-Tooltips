@@ -8,11 +8,10 @@ function isInsideLink(element) {
 }
 
 document.addEventListener('DOMContentLoaded', (evt) => {
-    console.log('DOMContentLoaded');
     // Function to initialize tooltip for each button
     function createToolTip(button) {
         console.log('Creating tooltip');
-        if (isInsideLink(button) && window.innerWidth < 992) return;
+        if (!isInsideLink(button) && window.innerWidth < 992) return;
         // Create the tooltip
         const tooltip = document.createElement('div');
         tooltip.setAttribute('role','tooltip');

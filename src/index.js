@@ -126,16 +126,34 @@ document.addEventListener('DOMContentLoaded', (evt) => {
             tooltip.classList.remove('show'); // Remove fade-in class
         }
 
+
+        // Track if the tooltip is open on mobile
+        let tooltipOpen = false;
         // Attach event listeners
+
         [
             ['mouseenter', showTooltip],
             ['mouseleave', hideTooltip],
             ['focus', showTooltip],
             ['blur', hideTooltip],
-            ['click', showTooltip], // For touch devices
+            ['click', () => {
+                if (window.innerWidth < 992) {
+                    // On mobile, toggle visibility on click
+                    if (tooltipOpen) {
+                        hideTooltip();
+                        tooltipOpen = false;
+                    } else {
+                        showTooltip();
+                        tooltipOpen = true;
+                    }
+                } else {
+                    showTooltip(); // On desktop, just show the tooltip
+                }
+            }],
         ].forEach(([event, listener]) => {
             button.addEventListener(event, listener);
         });
+
 
         // Handle autoUpdate for position adjustments
         autoUpdate(button, tooltip, update);

@@ -45,7 +45,7 @@
     width: 100vw;
     height: fit-content;
     overflow-y: auto;
-    /* Allow scrolling if needed */
+    pointer-events: all;
     z-index: 9999;
     border-radius: 16px 16px 0 0;
     padding: 16px 16px 64px 16px;

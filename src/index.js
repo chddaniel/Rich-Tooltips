@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (evt) => {
     // Function to initialize tooltip for each button
     function createToolTip(button) {
         console.log('Creating tooltip');
-        if (isInsideLink(button)) return;
+        if (isInsideLink(button) && window.innerWidth < 992) return;
         // Create the tooltip
         const tooltip = document.createElement('div');
         tooltip.setAttribute('role','tooltip');
@@ -108,15 +108,7 @@ document.addEventListener('DOMContentLoaded', (evt) => {
                         position: 'absolute', // Relative to the button
                     });
                 });
-            } else {
-                // For mobile, align the tooltip manually
-                // Object.assign(tooltip.style, {
-                //     position: 'fixed', // Relative to the viewport
-                //     left: '0',
-                //     bottom: '0',
-                //     width: '100vw',
-                // });
-            }
+            } 
         }
 
         // Show and hide the tooltip

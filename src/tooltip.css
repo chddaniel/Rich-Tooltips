@@ -28,8 +28,7 @@
   transition: opacity 0.3s ease, visibility 0s linear 0s;
 }
 
-[data-tooltip][data-video] .rich-tooltip__content-wrapper,
-[data-tooltip][data-image] .rich-tooltip__content-wrapper {
+.rich-tooltip__content-wrapper {
   width: 500px;
   height: auto;
 }

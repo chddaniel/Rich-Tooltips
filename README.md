@@ -9,7 +9,7 @@ Rich-Tooltips is a lightweight library for creating customizable tooltips with o
 - **Video Tooltips**: Embed videos (autoplay or loop) in tooltips.
 
 
-## For local testing & development
+### For local testing & development
 
 - Can run on NPM 10.2.4, Node v21.2.0
 - Clone the repo and run `npm install`
